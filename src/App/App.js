@@ -35,12 +35,22 @@ class App extends Component {
                 console.error({error});
             });
     }
+    // This handles the user input when creating a new note
+    handleAddNote = noteId => {
+        this.setState({
+            notes: {value: noteId, touched: true}
+        });
+    };
 
     handleDeleteNote = noteId => {
         this.setState({
             notes: this.state.notes.filter(note => note.id !== noteId)
         });
     };
+    //This deals with the user submiting the text for the folder
+    handleSubmit(event) {
+        event.preventdefault()
+    }
 
     renderNavRoutes() {
         return (
