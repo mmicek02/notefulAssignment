@@ -1,6 +1,6 @@
 import React, {Component} from "react";
 
-class AddFolder extends Component {
+class AddNote extends Component {
     constructor(props) {
         super(props);
         this.state = {
@@ -33,18 +33,18 @@ class AddFolder extends Component {
       }
     render() {
         return (
-            <form className='createNewFolder' onSubmit={e => this.handleSubmit(e)}>
-                <label htmlFor="name">Folder Name</label>
-                <input type="text" className="folder_name" name="name" id="name" 
-                defaultValue="New Folder" onChange={e => this.updateName(e.target.value)}/>
+            <form className='createNewNote' onSubmit={e => this.handleSubmit(e)}>
+                <label htmlFor="name">Note Name</label>
+                <input type="text" className="note_name" name="name" id="name" 
+                defaultValue="New Note" onChange={e => this.updateName(e.target.value)}/>
                 <button 
                     type="submit" 
-                    className="newFolder__button"
+                    className="newNote__button"
                     disabled={
                         this.validateName()
-                    }>Create Folder</button>
+                    }>Create Note</button>
             </form>
         );
     }
 }
-export default AddFolder;
+export default AddNote;

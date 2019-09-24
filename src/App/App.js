@@ -6,8 +6,11 @@ import NotePageNav from '../NotePageNav/NotePageNav';
 import NoteListMain from '../NoteListMain/NoteListMain';
 import NotePageMain from '../NotePageMain/NotePageMain';
 import ApiContext from '../ApiContext';
+import AddFolder from '../AddFolder/addFolder';
+//import AddNote from '../AddNote';
 import config from '../config';
 import './App.css';
+import AddNote from '../AddNote/addNote';
 
 class App extends Component {
     state = {
@@ -35,22 +38,12 @@ class App extends Component {
                 console.error({error});
             });
     }
-    // This handles the user input when creating a new note
-    handleAddNote = noteId => {
-        this.setState({
-            notes: {value: noteId, touched: true}
-        });
-    };
 
     handleDeleteNote = noteId => {
         this.setState({
             notes: this.state.notes.filter(note => note.id !== noteId)
         });
     };
-    //This deals with the user submiting the text for the folder
-    handleSubmit(event) {
-        event.preventdefault()
-    }
 
     renderNavRoutes() {
         return (
@@ -104,6 +97,8 @@ class App extends Component {
                     </header>
                     <main className="App__main">{this.renderMainRoutes()}</main>
                 </div>
+                <AddFolder />
+                <AddNote />
             </ApiContext.Provider>
         );
     }
