@@ -27,6 +27,32 @@ class AddNote extends Component {
         event.preventDefault();
         const {name} = this.state;
         console.log('Name: ', name.value);
+        const url ='./http://localhost:9090/notes'
+        const options = {
+            method: 'POST',
+            body: JSON.stringify(name),
+            headers: {
+            }
+        };
+
+        fetch(url, options)
+      .then(res => {
+        if(!res.ok) {
+          throw new Error('Something went wrong, please try again later');
+        }
+        return res.json();
+      })
+      .then(data => {
+        this.setState({
+          name: "",
+        });
+        this.props.handleAdd(name);
+      })
+      .catch(err => {
+        this.setState({
+          error: err.message
+        });
+      });
     }
     validateName() {
         const name = this.state.name.value.trim();
