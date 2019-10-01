@@ -29,13 +29,11 @@ class AddFolder extends Component {
         event.preventDefault();
         const {name} = this.state;
         console.log('Name: ', name.value);
-        const url =''
+        const url ='./http://localhost:9090/folders'
         const options = {
             method: 'POST',
             body: JSON.stringify(name),
             headers: {
-              "Content-Type": "application/json",
-              "Authorization": "Bearer $2a$10$ZhdeJefcb.5sx/DCmO/n8u5sJLcARAdbHw9tfm1mevGRq3s1.5DpW"
             }
         };
 
