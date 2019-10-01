@@ -46,10 +46,7 @@ class AddFolder extends Component {
       })
       .then(data => {
         this.setState({
-          title: "",
-          url: "",
-          description: "",
-          rating: 1
+          name: "",
         });
         this.props.handleAdd(name);
       })
