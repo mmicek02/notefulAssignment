@@ -69,16 +69,24 @@ class AddFolder extends Component {
     render() {
 
         return (
-            <form className='createNewFolder' onSubmit={e => this.handleSubmit(e)}>
+            <form 
+              className='createNewFolder' 
+              onSubmit={e => this.handleSubmit(e)}>
                 <label htmlFor="name">New Folder</label>
-                <input type="text" className="folder_name" name="name" id="name" 
-                defaultValue="New Folder Name" onChange={e => this.updateName(e.target.value)}/>
+                <input 
+                  type="text" 
+                  className="folder_name" 
+                  name="name" 
+                  id="name" 
+                  defaultValue="New Folder Name" 
+                  onChange={e => this.updateName(e.target.value)}/>
                 <button 
                     type="submit" 
                     className="newFolder__button"
                     disabled={
-                        this.validateName()
-                    }>Create Folder</button>
+                        this.validateName()}>
+                  Create Folder
+                </button>
             </form>
         );
     }
