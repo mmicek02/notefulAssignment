@@ -1,10 +1,6 @@
 import React, {Component} from "react";
 import PropTypes from 'prop-types';
-
-// AddFolder.propTypes = {
-//     value: PropTypes.string.isRequired
-//   };
-  
+import ValidationError from '../ValidationError/validationError'
 
 class AddFolder extends Component {
     constructor(props) {
@@ -29,7 +25,7 @@ class AddFolder extends Component {
         event.preventDefault();
         const {name} = this.state;
         console.log('Name: ', name.value);
-        const url ='./http://localhost:9090/folders'
+        const url ='http://localhost:9090/folders'
         const options = {
             method: 'POST',
             body: JSON.stringify(name),
@@ -45,10 +41,8 @@ class AddFolder extends Component {
         return res.json();
       })
       .then(data => {
-        this.setState({
-          name: "",
-        });
-        this.props.handleAdd(name);
+        console.log(this.state.name);
+        this.props.handleAdd(this.state.name.value);
       })
       .catch(err => {
         this.setState({
@@ -58,7 +52,10 @@ class AddFolder extends Component {
 
     }
     validateName() {
-        const name = this.state.name.value.trim();
+      console.log(this.state.name);
+      console.log(this.state.name.value);
+      console.log(this.state.name.value.trim());  
+      const name = this.state.name.value.trim();
         if (name.length === 0) {
           return 'Name is required';
         } else if (name.length < 3) {
@@ -67,12 +64,13 @@ class AddFolder extends Component {
       }
 
     render() {
-
+       const nameError = this.validateName();
         return (
             <form 
               className='createNewFolder' 
               onSubmit={e => this.handleSubmit(e)}>
                 <label htmlFor="name">New Folder</label>
+                <br />
                 <input 
                   type="text" 
                   className="folder_name" 
@@ -80,6 +78,8 @@ class AddFolder extends Component {
                   id="name" 
                   defaultValue="New Folder Name" 
                   onChange={e => this.updateName(e.target.value)}/>
+                  {this.state.name.touched && <ValidationError message={nameError} />}
+                  <br />
                 <button 
                     type="submit" 
                     className="newFolder__button"
@@ -92,3 +92,7 @@ class AddFolder extends Component {
     }
 }
 export default AddFolder;
+
+AddFolder.propTypes = {
+  value: PropTypes.string.isRequired
+};

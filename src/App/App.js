@@ -8,6 +8,7 @@ import NotePageMain from '../NotePageMain/NotePageMain';
 import ApiContext from '../ApiContext';
 import config from '../config';
 import './App.css';
+import CatchError from '../ErrorCatch/errorCatch';
 
 class App extends Component {
     state = {
@@ -54,8 +55,12 @@ class App extends Component {
                     />
                 ))}
                 <Route path="/note/:noteId" component={NotePageNav} />
-                <Route path="/add-folder" component={NotePageNav} />
-                <Route path="/add-note" component={NotePageNav} />
+                <CatchError>
+                    <Route path="/add-folder" component={NotePageNav} />
+                </CatchError>
+                <CatchError>
+                    <Route path="/add-note" component={NotePageNav} />
+                </CatchError>
             </>
         );
     }

@@ -1,10 +1,6 @@
 import React, {Component} from "react";
 import PropTypes from 'prop-types';
 
-// AddNote.propTypes = {
-//     value: PropTypes.string.isRequired
-//   };
-
 class AddNote extends Component {
     constructor(props) {
         super(props);
@@ -27,7 +23,7 @@ class AddNote extends Component {
         event.preventDefault();
         const {name} = this.state;
         console.log('Name: ', name.value);
-        const url ='./http://localhost:9090/notes'
+        const url ='http://localhost:9090/notes'
         const options = {
             method: 'POST',
             body: JSON.stringify(name),
@@ -43,9 +39,6 @@ class AddNote extends Component {
         return res.json();
       })
       .then(data => {
-        this.setState({
-          name: "",
-        });
         this.props.handleAdd(name);
       })
       .catch(err => {
@@ -55,6 +48,7 @@ class AddNote extends Component {
       });
     }
     validateName() {
+        console.log(this.state.name)
         const name = this.state.name.value.trim();
         if (name.length === 0) {
           return 'Name is required';
@@ -66,10 +60,16 @@ class AddNote extends Component {
     render() {
         return (
             <form className='createNewNote' onSubmit={e => this.handleSubmit(e)}>
-                <label htmlFor="name">Add Note</label> 
+                <label 
+                  htmlFor="name">Add Note</label> 
                 <br/>
-                <input type="text" className="note_name" name="name" id="name" 
-                defaultValue="New Note" onChange={e => this.updateName(e.target.value)}/>
+                <input 
+                  type="text" 
+                  className="note_name" 
+                  name="name" 
+                  id="name" 
+                  defaultValue="New Note" 
+                  onChange={e => this.updateName(e.target.value)}/>
                 <br />
                 <button 
                     type="submit" 
@@ -82,3 +82,7 @@ class AddNote extends Component {
     }
 }
 export default AddNote;
+
+AddNote.propTypes = {
+    value: PropTypes.string.isRequired
+  };
